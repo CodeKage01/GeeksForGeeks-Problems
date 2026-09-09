@@ -1,0 +1,36 @@
+class Solution {
+    public int pairCount(int x, int y) {
+        if(y % x != 0){
+            return 0;
+        }
+        
+        int n = y/x;
+        int count = 0;
+        
+        for(int p=1;p*p<=n;p++){
+            if(n % p == 0){
+                int q = n / p;
+                
+                if(gcd(p, q) == 1){
+                    count+= 2;
+                }
+            }
+        }
+        
+        // when x == y, n = 1
+        // (1, 1)
+        if(n == 1){
+            return 1;
+        }
+        return count;
+    }
+    
+    private int gcd(int a, int b){
+        while(b != 0){
+            int temp = a % b;
+            a = b;
+            b = temp;
+        }
+        return a;
+    }
+}
